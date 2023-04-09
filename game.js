@@ -17,7 +17,7 @@ function setCanvasSize(){
 
     canvas.setAttribute("width", canvasSize)
     canvas.setAttribute("height", canvasSize)
-    elementSize = canvasSize / 10;
+    elementSize = (canvasSize / 10)-1;
     startGame();
 }
 
@@ -28,7 +28,7 @@ function startGame(){
     game.textAlign = "end";
 
     for (let i = 1; i <=10 ; i++){
-        game.fillText(emojis["X"],elementSize*i,elementSize)
+        game.fillText(emojis['X'], elementSize, elementSize * i);
     }
     
 }

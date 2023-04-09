@@ -1,0 +1,19 @@
+.btns {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    grid-template-rows: repeat(2,auto);
+    grid-gap: 8px;
+}
+
+#up {grid-column: 2/3;}
+#left {grid-column: 1/2; grid-row: 2/3;}
+#down {grid-column: 2/3; grid-row: 2/3;}
+#right {grid-column: 3/4; grid-row: 2/3;}
+
+@media (max-width:360px) {
+    .btns{
+        grid-template-rows: repeat(3,auto);
+    }
+
+    #down {grid-column: 2/3; grid-row: 3/4;}
+}
