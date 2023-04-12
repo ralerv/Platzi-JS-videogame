@@ -10,8 +10,17 @@ const playerPosition = {
     y: undefined,
 }
 
+const giftPosition = {
+    x: undefined,
+    y: undefined,
+}
+
+let blocksPositions = []
+
+let flag=true;
 let elementSize;
 let canvasSize = 0;
+let nivel = 0;
 
 window.addEventListener("load",setCanvasSize);
 window.addEventListener("resize",setCanvasSize);
@@ -28,17 +37,15 @@ function setCanvasSize(){
     canvas.setAttribute("width", canvasSize)
     canvas.setAttribute("height", canvasSize)
     elementSize = canvasSize / 10;
-    startGame();
+    startGame(nivel);
 }
 
-function startGame(){
-    console.log(canvasSize,elementSize)
-
+function startGame(level){
     game.font = elementSize + "px Verdana"
     game.textAlign = "end";
 
     const map = maps[0];
-    const mapRows = maps[0].trim().split("\n");
+    const mapRows = map.trim().split("\n");
     const mapRowCols = mapRows.map(row => row.trim().split(''));
 
     game.clearRect(0,0,canvasSize,canvasSize)
@@ -52,12 +59,23 @@ function startGame(){
                 if (!playerPosition.x && !playerPosition.y) {
                     playerPosition.x = posX;
                     playerPosition.y = posy;
-                    console.log(playerPosition)
                 }
+            } else if (col == "I") {
+                giftPosition.x = posX;
+                giftPosition.y = posy;
+                console.log({giftPosition})
+            } else if (col == "X" && flag) {
+                blocksPositions.push(
+                    {
+                        x: posX,
+                        y: posy,
+                    }
+                )
             }
             game.fillText(emoji,posX,posy)
         })
     });
+    flag = false;
     movePlayer();
 }
 
@@ -128,6 +146,24 @@ function keyboardUp(evento){
 }
 
 function movePlayer(){
+    const giftPositionX = Math.floor(giftPosition.x) == Math.floor(playerPosition.x)
+    const giftPositionY = Math.floor(giftPosition.y) == Math.floor(playerPosition.y)
+    const giftColission = giftPositionX && giftPositionY
+    let blockColission = blocksPositions.find(block => {
+        const blockColissionX = Math.floor(block.x) == Math.floor(playerPosition.x)
+        const blockColissionY = Math.floor(block.y) == Math.floor(playerPosition.y)
+        return blockColissionX && blockColissionY
+    })
+
+    if (giftColission) {
+        console.log("regalo xd")
+        nivel += 1
+    }
+
+    if (blockColission) {
+        console.log("colision xd")
+    }
+
     game.fillText(emojis["PLAYER"], playerPosition.x,playerPosition.y);
 }
 
