@@ -20,7 +20,7 @@ let blocksPositions = []
 let flag=true;
 let elementSize;
 let canvasSize = 0;
-let nivel = 0;
+let level = 0;
 
 window.addEventListener("load",setCanvasSize);
 window.addEventListener("resize",setCanvasSize);
@@ -37,14 +37,20 @@ function setCanvasSize(){
     canvas.setAttribute("width", canvasSize)
     canvas.setAttribute("height", canvasSize)
     elementSize = canvasSize / 10;
-    startGame(nivel);
+    startGame();
 }
 
-function startGame(level){
+function startGame(){
     game.font = elementSize + "px Verdana"
     game.textAlign = "end";
 
-    const map = maps[0];
+    const map = maps[level];
+
+    if(!map){
+        gameWin();
+        return
+    }
+
     const mapRows = map.trim().split("\n");
     const mapRowCols = mapRows.map(row => row.trim().split(''));
 
@@ -157,7 +163,8 @@ function movePlayer(){
 
     if (giftColission) {
         console.log("regalo xd")
-        nivel += 1
+        level += 1
+        startGame()
     }
 
     if (blockColission) {
@@ -167,3 +174,7 @@ function movePlayer(){
     game.fillText(emojis["PLAYER"], playerPosition.x,playerPosition.y);
 }
 
+function gameWin(){
+    level = 0;
+    startGame()
+}
