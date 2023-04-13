@@ -4,6 +4,8 @@ const btnUp = document.querySelector("#up");
 const btnLeft = document.querySelector("#left");
 const btnDown = document.querySelector("#down");
 const btnRight = document.querySelector("#right");
+const spanLives = document.querySelector("#lives");
+const spanLevel = document.querySelector("#level");
 
 const playerPosition = {
     x: undefined,
@@ -54,7 +56,7 @@ function startGame(){
     const mapRows = map.trim().split("\n");
     const mapRowCols = mapRows.map(row => row.trim().split(''));
     blocksPositions = [];
-
+    showstats()
     game.clearRect(0,0,canvasSize,canvasSize)
 
     mapRowCols.forEach((row,rowI) => {
@@ -174,6 +176,11 @@ function movePlayer(){
     }
 
     game.fillText(emojis["PLAYER"], playerPosition.x,playerPosition.y);
+}
+
+function showstats(){
+    spanLives.innerText = (emojis["HEART"].repeat(lives)).toString();
+    spanLevel.innerText = (level + 1).toString();
 }
 
 function gameWin(){
