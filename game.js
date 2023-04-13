@@ -17,10 +17,10 @@ const giftPosition = {
 
 let blocksPositions = []
 
-let flag=true;
 let elementSize;
 let canvasSize = 0;
 let level = 0;
+let lives = 3;
 
 window.addEventListener("load",setCanvasSize);
 window.addEventListener("resize",setCanvasSize);
@@ -53,6 +53,7 @@ function startGame(){
 
     const mapRows = map.trim().split("\n");
     const mapRowCols = mapRows.map(row => row.trim().split(''));
+    blocksPositions = [];
 
     game.clearRect(0,0,canvasSize,canvasSize)
 
@@ -70,7 +71,7 @@ function startGame(){
                 giftPosition.x = posX;
                 giftPosition.y = posy;
                 console.log({giftPosition})
-            } else if (col == "X" && flag) {
+            } else if (col == "X") {
                 blocksPositions.push(
                     {
                         x: posX,
@@ -81,7 +82,6 @@ function startGame(){
             game.fillText(emoji,posX,posy)
         })
     });
-    flag = false;
     movePlayer();
 }
 
@@ -156,7 +156,7 @@ function movePlayer(){
     const giftPositionY = Math.floor(giftPosition.y) == Math.floor(playerPosition.y)
     const giftColission = giftPositionX && giftPositionY
     let blockColission = blocksPositions.find(block => {
-        const blockColissionX = Math.floor(block.x) == Math.floor(playerPosition.x)
+        const blockColissionX = block.x.toFixed(1) == playerPosition.x.toFixed(1)
         const blockColissionY = Math.floor(block.y) == Math.floor(playerPosition.y)
         return blockColissionX && blockColissionY
     })
@@ -168,13 +168,27 @@ function movePlayer(){
     }
 
     if (blockColission) {
+        lives -=1
         console.log("colision xd")
+        levelFail()
     }
 
     game.fillText(emojis["PLAYER"], playerPosition.x,playerPosition.y);
 }
 
 function gameWin(){
-    level = 0;
-    startGame()
+    alert("Ganaste xd");
+}
+
+function levelFail(){
+    
+    console.log("pipipi");
+    if (lives <= 0){
+        level = 0;
+        lives = 3;
+    }
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    startGame();
 }
