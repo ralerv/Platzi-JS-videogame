@@ -7,6 +7,8 @@ const btnRight = document.querySelector("#right");
 const spanLives = document.querySelector("#lives");
 const spanLevel = document.querySelector("#level");
 const spanTime = document.querySelector("#time");
+const spanRecord = document.querySelector("#record");
+const spanNewRecord = document.querySelector("#new_record");
 
 const playerPosition = {
     x: undefined,
@@ -52,14 +54,15 @@ function startGame(){
 
     const map = maps[level];
 
-    if (!timeStart) {
-        timeStart = Date.now();
-        timeInterval = setInterval (showTime,10);
-    }
-
     if(!map){
         gameWin();
         return
+    }
+
+    if (!timeStart) {
+        timeStart = Date.now();
+        timeInterval = setInterval (showTime,10);
+        showRecord()
     }
 
     const mapRows = map.trim().split("\n");
@@ -195,9 +198,28 @@ function showTime(){
     spanTime.innerHTML = Date.now()-timeStart;
 }
 
+function showRecord(){
+    spanRecord.innerHTML = (localStorage.getItem("record_time"));
+}
+
 function gameWin(){
-    alert("Ganaste xd");c
+    console.log("Ganaste xd");
     clearInterval(timeInterval)
+
+    const recordTime = localStorage.getItem("record_time");
+    const playerTime = Date.now() - timeStart;
+
+    if (recordTime){
+        if (recordTime >= playerTime){
+            localStorage.setItem("record_time",playerTime);
+            spanNewRecord.innerText = " ¡Nuevo Record!";
+        }
+        else {console.log("noahyrecordsuperao")}
+    } else {
+        localStorage.setItem("record_time",playerTime);
+        spanNewRecord.innerText = " ¡Nuevo Record!";
+    }
+    console.log({recordTime},{playerTime});
 }
 
 function levelFail(){
