@@ -8,19 +8,29 @@
     <title>Platzi JS game - Ralerv Version</title>
 </head>
 <body>
-    <canvas id="game"></canvas>
-    <div class="btns">
-        <button id="up">↑</button>
-        <button id="left">←</button>
-        <button id="down">↓</button>
-        <button id="right">→</button>
-    </div>
-    <div class="messages">
-        <p>Vidas: <span id="lives"></span></p>
-        <p>Nivel: <span id="level"></span></p>
-        <p>Tiempo: ⏱️ <span id="time"></span></span><span id="new_record"></span></p>
-        <p>Record: <span id="record"></p>
-    </div>
+    <header class="intro">
+        <section class="intro__content">
+            <h1>Laberinto peligroso xd</h1>
+            <p>Lleva tu personaje <span id="personaje"></span> hacia la meta <span id="meta"></span> evitando tocar los obstaculos <span id="obstaculo"></span> o si no perderás vidas D:</p>
+            <button onclick="buttonStart()">¡Empezar!</button>
+        </section>
+    </header>
+    <main class="gameplay">
+        <canvas class="gameplay__canvas" id="game"></canvas>
+        <div class="gameplay__btns">
+            <button id="up">↑</button>
+            <button id="left">←</button>
+            <button id="down">↓</button>
+            <button id="right">→</button>
+        </div>
+        <div class="gameplay__messages">
+            <p class="gameplay__messages__lives">Vidas: <span id="lives"></span></p>
+            <p class="gameplay__messages__level">Nivel: <span id="level"></span></p>
+            <p class="gameplay__messages__time">Tiempo: ⏱️ <span id="time"></span></span><span id="new_record"></span></p>
+            <p class="gameplay__messages__record">Record: <span id="record"></p>
+        </div>
+    </main>
+    <section class="resume-page"></section>
     <script src="./maps.js"></script>
     <script src="./game.js"></script>
 </body>
