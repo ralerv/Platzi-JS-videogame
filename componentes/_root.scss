@@ -1,3 +1,9 @@
+$fuente1: 'Sarabun', sans-serif;
+$color-primario: #0FA3B1;
+$color-secundario: #B1740F;
+$color-oscuro: #13262F;
+$color-claro: #B5E2FA;
+
 *{
     padding: 0;
     margin: 0;
@@ -7,6 +13,13 @@
 body {
 	margin: 0;
 	min-height: 100vh;
+    font-family: $fuente1;
+    background-color: $color-claro;
+    background-attachment: fixed;
+    background-image: -moz-linear-gradient(45deg, $color-claro, $color-primario);
+    background-image: -o-linear-gradient(45deg, $color-claro, $color-primario);
+    background-image: -webkit-linear-gradient(45deg, $color-claro, $color-primario);
+    background-image: linear-gradient(45deg, $color-claro, $color-primario);
 }
 
 a {
