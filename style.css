@@ -21,16 +21,38 @@ body {
   position: fixed;
   width: 100vw;
   height: 100vh;
+  font-size: 62.5%;
+  font-family: "Sarabun", sans-serif;
 }
 
 .intro {
   width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
+  height: 100vh;
 }
 .intro__content {
   background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5%;
+  gap: 32px;
+}
+.intro__content h1 {
+  font-size: 2.4rem;
+  text-align: center;
+}
+.intro__content p {
+  font-size: 1.6rem;
+  text-align: start;
+}
+.intro__content button {
+  width: 100%;
+  max-width: 400px;
+  font-size: 2rem;
+  padding: 8px;
 }
 
 .gameplay__canvas {
