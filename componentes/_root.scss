@@ -4,6 +4,10 @@ $color-secundario: #B1740F;
 $color-oscuro: #13262F;
 $color-claro: #B5E2FA;
 
+@mixin moveTransition {
+    transition: transform 0.5s;
+}
+
 *{
     padding: 0;
     margin: 0;
@@ -11,8 +15,13 @@ $color-claro: #B5E2FA;
 }
 
 body {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
 	margin: 0;
 	min-height: 100vh;
+    font-size: 62.5%;
+    color: $color-oscuro;
     font-family: $fuente1;
     background-color: $color-claro;
     background-attachment: fixed;
@@ -28,4 +37,8 @@ a {
 
 p, figure {
 	margin: 0;
+}
+
+.move {
+    transform: translateY(-100%);
 }

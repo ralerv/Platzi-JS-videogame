@@ -9,6 +9,8 @@ const spanLevel = document.querySelector("#level");
 const spanTime = document.querySelector("#time");
 const spanRecord = document.querySelector("#record");
 const spanNewRecord = document.querySelector("#new_record");
+const introContainer = document.querySelector(".intro");
+const gameplayContainer = document.querySelector(".gameplay");
 
 const playerPosition = {
     x: undefined,
@@ -32,6 +34,11 @@ let timeInterval;
 
 window.addEventListener("load",setCanvasSize);
 window.addEventListener("resize",setCanvasSize);
+
+function buttonStart(){
+    introContainer.classList.add("move");
+    gameplayContainer.classList.add("move");
+}
 
 function setCanvasSize(){
     let percent = 0.8

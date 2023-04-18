@@ -5,8 +5,13 @@
 }
 
 body {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   min-height: 100vh;
+  font-size: 62.5%;
+  color: #13262F;
   font-family: "Sarabun", sans-serif;
   background-color: #B5E2FA;
   background-attachment: fixed;
@@ -24,17 +29,14 @@ p, figure {
   margin: 0;
 }
 
-body {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  font-size: 62.5%;
-  color: #13262F;
+.move {
+  transform: translateY(-100%);
 }
 
 .intro {
   width: 100%;
   height: 100vh;
+  transition: transform 0.5s;
 }
 .intro__content {
   display: flex;
@@ -66,6 +68,11 @@ body {
   box-shadow: 0px 0px 8px 0px rgba(19, 38, 47, 0.8);
 }
 
+.gameplay {
+  height: 100vh;
+  width: 100vw;
+  transition: transform 0.5s;
+}
 .gameplay__canvas {
   border: none;
 }
