@@ -11,6 +11,8 @@ const spanRecord = document.querySelector("#record");
 const spanNewRecord = document.querySelector("#new_record");
 const introContainer = document.querySelector(".intro");
 const gameplayContainer = document.querySelector(".gameplay");
+const resultContainer = document.querySelector("#result");
+const resumePageContainer = document.querySelector(".resume-page")
 
 const playerPosition = {
     x: undefined,
@@ -205,7 +207,15 @@ function showstats(){
     spanLevel.innerText = (level + 1).toString();
 }
 function showTime(){
-    spanTime.innerHTML = Date.now()-timeStart;
+    let gameClock = Date.now()-timeStart; //reloj desde que empiza el juego
+    let Clock = new Date(gameClock); //convertir al reloj en un objeto para extraer sus valroes
+    let ClockMinutes = Clock.getMinutes() //obtener minutos
+    let ClockSeconds = Clock.getSeconds() //obtener segundos
+    let ClockMilliseconds = Clock.getMilliseconds().toString().slice(0, 2) //obtener milisegundos, convertirlo a string para extraer solo los 2 primeros
+    if (ClockSeconds < 10) //agregar 0 a la derecha si los segundos son menores 10
+    {ClockWithFormat = (ClockMinutes + ":0" + ClockSeconds + ":" + ClockMilliseconds)}
+    else {ClockWithFormat = (ClockMinutes + ":" + ClockSeconds + ":" + ClockMilliseconds)}; //si los segundos son iguales o mayores a 10 no se le agrega nada
+    spanTime.innerText = ClockWithFormat.toString(); 
 }
 
 function showRecord(){
@@ -213,7 +223,7 @@ function showRecord(){
 }
 
 function gameWin(){
-    console.log("Ganaste xd");
+    resultContainer.innerText = "🎉 Juego completado"
     clearInterval(timeInterval)
 
     const recordTime = localStorage.getItem("record_time");
@@ -224,11 +234,12 @@ function gameWin(){
             localStorage.setItem("record_time",playerTime);
             spanNewRecord.innerText = " ¡Nuevo Record!";
         }
-        else {spanNewRecord.innerText = "noahyrecordsuperao";}
     } else {
         localStorage.setItem("record_time",playerTime);
         spanNewRecord.innerText = " ¡Nuevo Record!";
     }
+
+    showResults()
     console.log({recordTime},{playerTime});
 }
 
@@ -239,10 +250,15 @@ function levelFail(){
         level = 0;
         lives = 3;
         timeStart = undefined;
-        alert("perdite xd");
+        resultContainer.innerText = "No pudiste completar el juego :(";
+        showResults()
     }
 
     playerPosition.x = undefined;
     playerPosition.y = undefined;
     startGame();
+}
+
+function showResults(){
+    resumePageContainer.classList.add("show");
 }
