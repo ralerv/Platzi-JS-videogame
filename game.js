@@ -41,7 +41,7 @@ function buttonStart(){
 }
 
 function setCanvasSize(){
-    let percent = 0.8
+    let percent = 1
     if (window.innerWidth > window.innerHeight) {
         canvasSize = window.innerHeight * percent;
     }

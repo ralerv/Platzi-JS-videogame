@@ -27,3 +27,19 @@
         #down {grid-column: 2/3; grid-row: 3/4;}
     }
 }
+//Add iff only necesary xd
+//@media (orientation: portrait) {
+//    .gameplay{
+   //     &__canvas {
+  //          width: 100%;
+ //       }
+ //   }
+//}
+
+//@media (orientation: landscape) {
+ //   .gameplay{
+ //       &__canvas {
+ //          height: 100%;
+  //      }
+  //  }
+//}
