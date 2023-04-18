@@ -71,16 +71,27 @@ p, figure {
 .gameplay {
   height: 100vh;
   width: 100vw;
+  display: grid;
+  place-items: center;
   transition: transform 0.5s;
 }
 .gameplay__canvas {
   border: none;
 }
 .gameplay__btns {
+  aspect-ratio: 1.2;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(2, auto);
   grid-gap: 8px;
+}
+.gameplay__btns button {
+  border: none;
+  background-color: #0FA3B1;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #B5E2FA;
 }
 .gameplay__btns #up {
   grid-column: 2/3;
@@ -96,6 +107,18 @@ p, figure {
 .gameplay__btns #right {
   grid-column: 3/4;
   grid-row: 2/3;
+}
+.gameplay__messages {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 50% 50%;
+  place-items: center;
+  font-size: 1.2rem;
+}
+.gameplay__messages p {
+  text-align: center;
 }
 
 @media (max-width: 360px) {

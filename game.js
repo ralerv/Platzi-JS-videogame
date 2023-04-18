@@ -224,7 +224,7 @@ function gameWin(){
             localStorage.setItem("record_time",playerTime);
             spanNewRecord.innerText = " ¡Nuevo Record!";
         }
-        else {console.log("noahyrecordsuperao")}
+        else {spanNewRecord.innerText = "noahyrecordsuperao";}
     } else {
         localStorage.setItem("record_time",playerTime);
         spanNewRecord.innerText = " ¡Nuevo Record!";
