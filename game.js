@@ -13,6 +13,9 @@ const introContainer = document.querySelector(".intro");
 const gameplayContainer = document.querySelector(".gameplay");
 const resultContainer = document.querySelector("#result");
 const resumePageContainer = document.querySelector(".resume-page")
+const personajeIcon = document.querySelector("#personaje");
+const metaIcon = document.querySelector("#meta");
+const obstaculoIcon = document.querySelector("#obstaculo");
 
 const playerPosition = {
     x: undefined,
@@ -41,6 +44,10 @@ function buttonStart(){
     introContainer.classList.add("move");
     gameplayContainer.classList.add("move");
 }
+    
+personajeIcon.innerText = emojis["PLAYER"];
+metaIcon.innerText = emojis["O"];
+obstaculoIcon.innerText = emojis["X"];
 
 function setCanvasSize(){
     let percent = 1
