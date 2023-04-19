@@ -62,3 +62,8 @@ p, figure {
     transform: translateY(-100%);
 }
 
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
