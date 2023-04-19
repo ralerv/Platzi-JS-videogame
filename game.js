@@ -47,10 +47,10 @@ btnUp.addEventListener("click",moveUp)
 btnLeft.addEventListener("click",moveLeft)
 btnDown.addEventListener("click",moveDown)
 btnRight.addEventListener("click",moveRight)
-btnUp.addEventListener("touchstart",moveUp) //Touchable devices
-btnLeft.addEventListener("touchstart",moveLeft)
-btnDown.addEventListener("touchstart",moveDown)
-btnRight.addEventListener("touchstart",moveRight)
+btnUp.addEventListener("touchend",moveUp) //Touchable devices
+btnLeft.addEventListener("touchend",moveLeft)
+btnDown.addEventListener("touchend",moveDown)
+btnRight.addEventListener("touchsend",moveRight)
   
 personajeIcon.innerText = emojis["PLAYER"];
 metaIcon.innerText = emojis["O"];
@@ -63,13 +63,7 @@ function buttonStart(){
 }
 
 function setCanvasSize(){
-    let percent = 1
-    if (window.innerWidth > window.innerHeight) {
-        canvasSize = window.innerHeight * percent;
-    }
-    else {
-        canvasSize = window.innerWidth * percent;
-    }
+    canvasSize = canvas.clientWidth;
 
     playerPosition.x = undefined;
     playerPosition.y = undefined;

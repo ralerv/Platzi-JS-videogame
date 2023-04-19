@@ -1,6 +1,6 @@
 @use './index' as *;
 
-.gameplay {
+.gameplay {  //minwidth: 280px
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -8,22 +8,25 @@
     @include moveTransition;
     &__canvas{
         border: none;
+        aspect-ratio: 1/1;
     }
     &__btns {
-        aspect-ratio: 1.2;
-        width: 100%;
+        min-height: 140px;
+        height: 100%;
+        width: 96%;
         display: grid;
-        grid-template-columns: repeat(3,auto);
-        grid-template-rows: repeat(2,auto);
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(2,1fr);
         grid-gap: 8px;
         button {
+            aspect-ratio: 1 / 1;
             border: none;
             background-color: $color-primario;
             font-size: 2.0rem;
             font-weight: 700;
             color: $color-claro;
         }
-        #up {grid-column: 2/3;}
+        #up {grid-column: 2/3; align-self:end;}
         #left {grid-column: 1/2; grid-row: 2/3;}
         #down {grid-column: 2/3; grid-row: 2/3;}
         #right {grid-column: 3/4; grid-row: 2/3;}
@@ -42,27 +45,32 @@
     }
 }
 
-@media (max-width:360px) {
+@media (min-width:360px){
     .gameplay{
-        .btns{
-            grid-template-rows: repeat(3,auto);
+        &__btns {
+            button {
+                aspect-ratio: auto;
+            }
+            #up{
+                align-self: auto;
+            }
         }
-        #down {grid-column: 2/3; grid-row: 3/4;}
     }
 }
-//Add iff only necesary xd
-//@media (orientation: portrait) {
-//    .gameplay{
-   //     &__canvas {
-  //          width: 100%;
- //       }
- //   }
-//}
 
-//@media (orientation: landscape) {
- //   .gameplay{
- //       &__canvas {
- //          height: 100%;
-  //      }
-  //  }
-//}
+//Add iff only necesary xd
+@media (orientation: portrait) {
+    .gameplay{
+        &__canvas {
+            width: 100%;
+        }
+    }
+}
+
+@media (orientation: landscape) {
+   .gameplay{
+       &__canvas {
+          height: 100%;
+      }
+  }
+}

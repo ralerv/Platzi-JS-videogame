@@ -77,16 +77,19 @@ p, figure {
 }
 .gameplay__canvas {
   border: none;
+  aspect-ratio: 1/1;
 }
 .gameplay__btns {
-  aspect-ratio: 1.2;
-  width: 100%;
+  min-height: 140px;
+  height: 100%;
+  width: 96%;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   grid-gap: 8px;
 }
 .gameplay__btns button {
+  aspect-ratio: 1/1;
   border: none;
   background-color: #0FA3B1;
   font-size: 2rem;
@@ -95,6 +98,7 @@ p, figure {
 }
 .gameplay__btns #up {
   grid-column: 2/3;
+  align-self: end;
 }
 .gameplay__btns #left {
   grid-column: 1/2;
@@ -121,13 +125,22 @@ p, figure {
   text-align: center;
 }
 
-@media (max-width: 360px) {
-  .gameplay .btns {
-    grid-template-rows: repeat(3, auto);
+@media (min-width: 360px) {
+  .gameplay__btns button {
+    aspect-ratio: auto;
   }
-  .gameplay #down {
-    grid-column: 2/3;
-    grid-row: 3/4;
+  .gameplay__btns #up {
+    align-self: auto;
+  }
+}
+@media (orientation: portrait) {
+  .gameplay__canvas {
+    width: 100%;
+  }
+}
+@media (orientation: landscape) {
+  .gameplay__canvas {
+    height: 100%;
   }
 }
 .resume-page {
