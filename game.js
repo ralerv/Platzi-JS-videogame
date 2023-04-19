@@ -50,7 +50,7 @@ btnRight.addEventListener("click",moveRight)
 btnUp.addEventListener("touchend",moveUp) //Touchable devices
 btnLeft.addEventListener("touchend",moveLeft)
 btnDown.addEventListener("touchend",moveDown)
-btnRight.addEventListener("touchsend",moveRight)
+btnRight.addEventListener("touchend",moveRight)
   
 personajeIcon.innerText = emojis["PLAYER"];
 metaIcon.innerText = emojis["O"];
