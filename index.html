@@ -30,15 +30,16 @@
         <div class="gameplay__messages">
             <p class="gameplay__messages__lives">Vidas: <span id="lives"></span></p>
             <p class="gameplay__messages__level">Nivel: <span id="level"></span></p>
-            <p class="gameplay__messages__time">Tiempo:<br>⏱️ <span id="time">0:00:00</span></span></p>
-            <p class="gameplay__messages__record">Record: <span id="record"></p>
+            <p class="gameplay__messages__time">Tiempo:<br>⏱️<span id="time">0:00:00</span></span></p>
+            <p class="gameplay__messages__record">Record:<br><span id="record">0:00:00</p>
         </div>
     </main>
     <section class="resume-page">
         <div class="resume-page__container">
             <h3 id="result"></h3>
             <p id="new_record"></p>
-            <button>Nuevo intento</button>
+            <button onclick="restartGame()">Nuevo intento</button>
+            <button onclick="restartRecords()">Borrar Record</button>
         </div>
     </section>
     <script src="./maps.js"></script>

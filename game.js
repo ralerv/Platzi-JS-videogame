@@ -77,7 +77,7 @@ function setCanvasSize(){
 function startGame(){
     game.font = elementSize + "px Verdana"
     game.textAlign = "end";
-
+    showRecord()
     const map = maps[level];
 
     if(!map){
@@ -88,7 +88,7 @@ function startGame(){
     if (empezar && !timeStart) {
         timeStart = Date.now();
         timeInterval = setInterval (showTime,10);
-        showRecord()
+        
     }
 
     const mapRows = map.trim().split("\n");
@@ -128,6 +128,7 @@ function startGame(){
 
 
 function moveUp() {
+    empezar = true;
     console.log("Me movere hacia arriba");
     if (playerPosition.y < elementSize) {
         console.log({playerPosition})
@@ -139,6 +140,7 @@ function moveUp() {
   }
   
 function moveLeft() {
+    empezar = true;
     console.log("Me movere hacia izq");
     if ((playerPosition.x - elementSize) < elementSize) {
         console.log({playerPosition})
@@ -150,6 +152,7 @@ function moveLeft() {
 }
  
 function moveDown() {
+    empezar = true;
     console.log("Me movere hacia aba");
     if ((playerPosition.y + elementSize) > canvasSize) {
         console.log({playerPosition})
@@ -161,6 +164,7 @@ function moveDown() {
 }
   
 function moveRight() {
+    empezar = true;
     console.log("Me movere hacia dere");
     if (playerPosition.x > canvasSize) {
         console.log({playerPosition})
@@ -172,7 +176,6 @@ function moveRight() {
 }
 
 function keyboardDown(evento){
-    empezar = true;
     let tecla = evento.key;
     switch (tecla) {
         case "ArrowUp":moveUp();break;
@@ -216,7 +219,7 @@ function showstats(){
     spanLives.innerText = (emojis["HEART"].repeat(lives)).toString();
     spanLevel.innerText = (level + 1).toString();
 }
-function showTime(){
+function showTime(reinicio){
     let gameClock = Date.now()-timeStart; //reloj desde que empiza el juego
     let Clock = new Date(gameClock); //convertir al reloj en un objeto para extraer sus valroes
     let ClockMinutes = Clock.getMinutes() //obtener minutos
@@ -225,11 +228,17 @@ function showTime(){
     if (ClockSeconds < 10) //agregar 0 a la derecha si los segundos son menores 10
     {ClockWithFormat = (ClockMinutes + ":0" + ClockSeconds + ":" + ClockMilliseconds)}
     else {ClockWithFormat = (ClockMinutes + ":" + ClockSeconds + ":" + ClockMilliseconds)}; //si los segundos son iguales o mayores a 10 no se le agrega nada
-    spanTime.innerText = ClockWithFormat.toString(); 
+    if (reinicio == "reinicio"){ClockWithFormat="0:00:00"}
+    spanTime.innerText = ClockWithFormat.toString();
+    console.log(gameClock)
 }
 
 function showRecord(){
-    spanRecord.innerHTML = (localStorage.getItem("record_time"));
+    let recordHTML = (localStorage.getItem("record_time"));
+    if (!localStorage.getItem("record_time")){
+        recordHTML = "000000"
+    }
+    spanRecord.innerHTML = recordHTML;
 }
 
 function gameWin(){
@@ -250,25 +259,38 @@ function gameWin(){
     }
 
     showResults()
-    console.log({recordTime},{playerTime});
 }
 
 function levelFail(){
-    
     console.log("pipipi");
     if (lives <= 0){
-        level = 0;
-        lives = 3;
-        timeStart = undefined;
+        clearInterval(timeInterval)
         resultContainer.innerText = "No pudiste completar el juego :(";
         showResults()
+    } else{
+        playerPosition.x = undefined;
+        playerPosition.y = undefined;
+        startGame();
     }
-
-    playerPosition.x = undefined;
-    playerPosition.y = undefined;
-    startGame();
 }
 
 function showResults(){
+    showRecord()
     resumePageContainer.classList.add("show");
+}
+
+function restartRecords(){
+    localStorage.removeItem("record_time");
+}
+
+function restartGame(){
+    resumePageContainer.classList.remove("show");
+    level = 0;
+    lives = 3;
+    timeStart = undefined;
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    empezar = false;
+    showTime("reinicio")
+    startGame();
 }
