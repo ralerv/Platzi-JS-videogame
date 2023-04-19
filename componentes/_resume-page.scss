@@ -11,12 +11,12 @@
     background-color: rgba($color: $color-oscuro, $alpha: 0.32);
     @include showTransition;
     &__container{
+        aspect-ratio: 1/1;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: $color-primario;
-        width: 90%;
         min-height: 200px;
         gap: 16px;
         padding: 12px;
@@ -31,6 +31,7 @@
             color: $color-secundario;
         }
         button {
+            @include centerBoxShadow;
             @include stylesButton;
             color: white;
             background-color: $color-secundario;
@@ -42,4 +43,22 @@
 .show {
     bottom: 0;
     opacity: 1;
+}
+
+@media (orientation: portrait) {
+    .resume-page{
+        &__container {
+            width: 90%;
+            max-width: 500px;
+        }
+    }
+}
+
+@media (orientation: landscape) {
+    .resume-page{
+        &__container {
+        height: 90%;
+        max-height: 500px;
+      }
+  }
 }
