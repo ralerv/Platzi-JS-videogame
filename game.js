@@ -29,6 +29,7 @@ const giftPosition = {
 
 let blocksPositions = []
 
+let empezar = false; //si aún no empieza (false), esperar que se mueva el pj, si ya empezo (true), se ignora ¿? 
 let elementSize;
 let canvasSize = 0;
 let level = 0;
@@ -40,14 +41,26 @@ let timeInterval;
 window.addEventListener("load",setCanvasSize);
 window.addEventListener("resize",setCanvasSize);
 
+window.addEventListener("keydown",keyboardDown);
+window.addEventListener("keyup",keyboardUp);
+btnUp.addEventListener("click",moveUp)
+btnLeft.addEventListener("click",moveLeft)
+btnDown.addEventListener("click",moveDown)
+btnRight.addEventListener("click",moveRight)
+btnUp.addEventListener("touchstart",moveUp) //Touchable devices
+btnLeft.addEventListener("touchstart",moveLeft)
+btnDown.addEventListener("touchstart",moveDown)
+btnRight.addEventListener("touchstart",moveRight)
+  
+personajeIcon.innerText = emojis["PLAYER"];
+metaIcon.innerText = emojis["O"];
+obstaculoIcon.innerText = emojis["X"];
+
+
 function buttonStart(){
     introContainer.classList.add("move");
     gameplayContainer.classList.add("move");
 }
-    
-personajeIcon.innerText = emojis["PLAYER"];
-metaIcon.innerText = emojis["O"];
-obstaculoIcon.innerText = emojis["X"];
 
 function setCanvasSize(){
     let percent = 1
@@ -78,7 +91,7 @@ function startGame(){
         return
     }
 
-    if (!timeStart) {
+    if (empezar && !timeStart) {
         timeStart = Date.now();
         timeInterval = setInterval (showTime,10);
         showRecord()
@@ -118,12 +131,7 @@ function startGame(){
     movePlayer();
 }
 
-window.addEventListener("keydown",keyboardDown);
-window.addEventListener("keyup",keyboardUp);
-btnUp.addEventListener("click",moveUp)
-btnLeft.addEventListener("click",moveLeft)
-btnDown.addEventListener("click",moveDown)
-btnRight.addEventListener("click",moveRight)
+
 
 function moveUp() {
     console.log("Me movere hacia arriba");
@@ -170,6 +178,7 @@ function moveRight() {
 }
 
 function keyboardDown(evento){
+    empezar = true;
     let tecla = evento.key;
     switch (tecla) {
         case "ArrowUp":moveUp();break;
